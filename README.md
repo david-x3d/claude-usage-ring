@@ -98,6 +98,10 @@ Catalogs live at `https://claude.ai/i18n/<locale>.json` (e.g. `de-DE`). The 19 m
 - Anchoring depends on the composer's model selector (`data-testid="model-selector-dropdown"`); if claude.ai renames it,
   a fallback next to the send button is used.
 
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
+
 ## License
 
 MIT for this project's code. The markup structure and CSS are Anthropic's and are fetched from claude.ai at build time.
