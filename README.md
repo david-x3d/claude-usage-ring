@@ -53,6 +53,18 @@ Or, with [web-ext](https://github.com/mozilla/web-ext): `npm run start:firefox`
 (`web-ext run --firefox=floorp …` for Floorp). Temporary add-ons are removed on restart; a permanent install needs
 a signed build (`npm run pack:firefox`, then sign via AMO) or a Firefox build that allows unsigned add-ons.
 
+### Permanent Firefox install (signed, unlisted)
+
+Release Firefox only runs signed add-ons permanently. Mozilla signs unlisted add-ons for free; the result is a private `.xpi`:
+
+1. Create API credentials at <https://addons.mozilla.org/developers/addon/api/key/> and export them in your shell
+   (`WEB_EXT_API_KEY`, `WEB_EXT_API_SECRET`; never commit them).
+2. Bump `version` in `manifests/firefox.json` (and `package.json`) for every new signature.
+3. `npm run sign:firefox` → builds, signs and writes `web-ext-artifacts/*.xpi`.
+4. In Firefox: `about:addons` → gear icon → **Install Add-on From File…**
+
+The signed `.xpi` contains Anthropic's stylesheet, so keep it private: it is git-ignored and must not go into releases.
+
 ### Chrome / Chromium / Edge
 
 `chrome://extensions` → enable **Developer mode** → **Load unpacked** → pick `dist/chrome`.

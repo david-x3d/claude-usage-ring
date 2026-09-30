@@ -10,6 +10,7 @@
     "build": "node tools/build.mjs",
     "start:firefox": "web-ext run --source-dir dist/firefox --start-url https://claude.ai/new",
     "lint:firefox": "web-ext lint --source-dir dist/firefox",
-    "pack:firefox": "web-ext build --source-dir dist/firefox --artifacts-dir dist --overwrite-dest"
+    "pack:firefox": "web-ext build --source-dir dist/firefox --artifacts-dir dist --overwrite-dest",
+    "sign:firefox": "node tools/sign.mjs"
   }
 }

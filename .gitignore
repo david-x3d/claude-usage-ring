@@ -2,3 +2,13 @@ node_modules/
 dist/
 build/
 *.zip
+
+# Signed builds contain Anthropic's CSS: never commit or release them
+web-ext-artifacts/
+*.xpi
+# Signing credentials / local secrets
+.env
+.env.*
+*.key
+*.pem
+*.secret
