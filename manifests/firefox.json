@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Claude Usage Ring",
+  "version": "0.2.0",
+  "description": "Adds the usage ring and popup from claude.ai/code to the composer of claude.ai chats.",
+  "icons": { "16": "icons/16.png", "32": "icons/32.png", "48": "icons/48.png", "128": "icons/128.png" },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "claude-usage-ring@unofficial",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": { "required": ["none"] }
+    }
+  },
+  "host_permissions": ["https://claude.ai/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://claude.ai/*"],
+      "js": ["shadow-css.js", "locales.js", "markup.js", "i18n.js", "usage-api.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

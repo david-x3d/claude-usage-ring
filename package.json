@@ -1,0 +1,15 @@
+{
+  "name": "claude-usage-ring",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Usage ring + popup from claude.ai/code in the claude.ai chat composer (Firefox and Chrome, Manifest V3)",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "css": "node tools/build-css.mjs",
+    "build": "node tools/build.mjs",
+    "start:firefox": "web-ext run --source-dir dist/firefox --start-url https://claude.ai/new",
+    "lint:firefox": "web-ext lint --source-dir dist/firefox",
+    "pack:firefox": "web-ext build --source-dir dist/firefox --artifacts-dir dist --overwrite-dest"
+  }
+}
