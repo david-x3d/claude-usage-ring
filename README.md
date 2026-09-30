@@ -10,6 +10,11 @@ windows, plus usage credits if enabled) and nothing about tokens or the context 
   日本語, 한국어, Português (Brasil), Español (Latinoamérica), Español (España)
 - Only talks to `claude.ai` with your existing session. No analytics, no third parties.
 
+<p align="center">
+  <img src="docs/screenshot-closed.png" alt="Usage ring in the claude.ai composer" width="49%">
+  <img src="docs/screenshot-popup.png" alt="Open usage popup with 5-hour and weekly limits" width="49%">
+</p>
+
 > **Unofficial.** Not affiliated with or endorsed by Anthropic. It uses the same internal, undocumented endpoint
 > as claude.ai itself (`GET /api/organizations/{id}/usage`), which can change at any time.
 
