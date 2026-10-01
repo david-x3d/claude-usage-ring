@@ -48,6 +48,11 @@ This creates `dist/firefox` and `dist/chrome`.
 
 ### Firefox / Floorp
 
+Easiest: download the signed `.xpi` from the [latest release](https://github.com/david-x3d/claude-usage-ring/releases/latest) and install it via `about:addons` → gear icon → **Install Add-on From File…**.
+
+From source:
+
+
 Temporary: `about:debugging#/runtime/this-firefox` → **Load Temporary Add-on…** → pick `dist/firefox/manifest.json`.
 Or, with [web-ext](https://github.com/mozilla/web-ext): `npm run start:firefox`
 (`web-ext run --firefox=floorp …` for Floorp). Temporary add-ons are removed on restart; a permanent install needs
@@ -63,7 +68,7 @@ Release Firefox only runs signed add-ons permanently. Mozilla signs unlisted add
 3. `npm run sign:firefox` → builds, signs and writes `web-ext-artifacts/*.xpi`.
 4. In Firefox: `about:addons` → gear icon → **Install Add-on From File…**
 
-The signed `.xpi` contains Anthropic's stylesheet, so keep it private: it is git-ignored and must not go into releases.
+The signed `.xpi` is git-ignored; attach it to a GitHub release by hand if you want to publish it (it contains Anthropic's stylesheet).
 
 ### Chrome / Chromium / Edge
 
