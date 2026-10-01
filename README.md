@@ -26,7 +26,21 @@ windows, plus usage credits if enabled) and nothing about tokens or the context 
 - On errors the ring is empty and values show `–`.
 - If your account already shows the native ring in the composer, the extension stays out of the way.
 
-## Install from source
+## Install
+
+### Firefox / Floorp (signed build)
+
+1. Download `claude-usage-ring-<version>.xpi` from the [latest release](https://github.com/david-x3d/claude-usage-ring/releases/latest).
+2. Open `about:addons` → gear icon → **Install Add-on From File…** and pick the file.
+
+The build is signed by Mozilla (unlisted), so it survives restarts.
+
+### Chrome / Chromium / Edge
+
+There is no store listing or prebuilt package yet. [Build from source](#build-from-source), then open
+`chrome://extensions` → enable **Developer mode** → **Load unpacked** → pick `dist/chrome`.
+
+## Build from source
 
 The original stylesheet is Anthropic's, so it is **not** committed here. You generate it from the public
 stylesheets that claude.ai serves to you:
@@ -46,33 +60,21 @@ stylesheets that claude.ai serves to you:
 
 This creates `dist/firefox` and `dist/chrome`.
 
-### Firefox / Floorp
+- **Firefox, temporary:** `about:debugging#/runtime/this-firefox` → **Load Temporary Add-on…** → `dist/firefox/manifest.json`
+  (removed on restart). Or with [web-ext](https://github.com/mozilla/web-ext): `npm run start:firefox`
+  (`web-ext run --firefox=floorp …` for Floorp).
+- **Chrome:** see above, load `dist/chrome`.
 
-Easiest: download the signed `.xpi` from the [latest release](https://github.com/david-x3d/claude-usage-ring/releases/latest) and install it via `about:addons` → gear icon → **Install Add-on From File…**.
+### Signing a Firefox build (maintainers)
 
-From source:
-
-
-Temporary: `about:debugging#/runtime/this-firefox` → **Load Temporary Add-on…** → pick `dist/firefox/manifest.json`.
-Or, with [web-ext](https://github.com/mozilla/web-ext): `npm run start:firefox`
-(`web-ext run --firefox=floorp …` for Floorp). Temporary add-ons are removed on restart; a permanent install needs
-a signed build (`npm run pack:firefox`, then sign via AMO) or a Firefox build that allows unsigned add-ons.
-
-### Permanent Firefox install (signed, unlisted)
-
-Release Firefox only runs signed add-ons permanently. Mozilla signs unlisted add-ons for free; the result is a private `.xpi`:
+Mozilla signs unlisted add-ons for free:
 
 1. Create API credentials at <https://addons.mozilla.org/developers/addon/api/key/> and export them in your shell
-   (`WEB_EXT_API_KEY`, `WEB_EXT_API_SECRET`; never commit them).
-2. Bump `version` in `manifests/firefox.json` (and `package.json`) for every new signature.
-3. `npm run sign:firefox` → builds, signs and writes `web-ext-artifacts/*.xpi`.
-4. In Firefox: `about:addons` → gear icon → **Install Add-on From File…**
-
-The signed `.xpi` is git-ignored; attach it to a GitHub release by hand if you want to publish it (it contains Anthropic's stylesheet).
-
-### Chrome / Chromium / Edge
-
-`chrome://extensions` → enable **Developer mode** → **Load unpacked** → pick `dist/chrome`.
+   (`WEB_EXT_API_KEY`, `WEB_EXT_API_SECRET`; never commit or share them).
+2. Bump `version` in `manifests/firefox.json` and `package.json`; the script refuses a version that is not higher
+   than the last signed one.
+3. `npm run sign:firefox` builds, signs and writes `web-ext-artifacts/*.xpi` (git-ignored).
+4. Attach the `.xpi` to a GitHub release by hand.
 
 ## Project layout
 
@@ -97,7 +99,7 @@ Catalogs live at `https://claude.ai/i18n/<locale>.json` (e.g. `de-DE`). The 19 m
 
 ## Known limitations
 
-- The plan name ("Pro", "Max (5x)", …) is derived from fields of `/api/organizations` and may be wrong for unusual plans.
+- The plan name ("Pro", "Max (5x)", …) is derived from fields of `/api/organizations`; confirmed for Pro, other plans may be wrong.
 - After sending a prompt the usage is re-fetched after 3, 15 and 45 seconds rather than exactly when the answer ends.
 - The popup has no open/close animation and no hover tooltip on the button.
 - Anchoring depends on the composer's model selector (`data-testid="model-selector-dropdown"`); if claude.ai renames it,
@@ -105,4 +107,4 @@ Catalogs live at `https://claude.ai/i18n/<locale>.json` (e.g. `de-DE`). The 19 m
 
 ## License
 
-MIT for this project's code. The markup structure and CSS are Anthropic's and are fetched from claude.ai at build time.
+MIT for this project's code. The markup structure and the extracted CSS are Anthropic's: the source repo does not contain the CSS, but the built extension (including the signed `.xpi` in releases) does.
