@@ -104,4 +104,4 @@ Catalogs live at `https://claude.ai/i18n/<locale>.json` (e.g. `de-DE`). The 19 m
 
 ## License
 
-MIT for this project's code. The markup structure and the extracted CSS are Anthropic's: the source repo does not contain the CSS, but the built extension (including the signed `.xpi` in releases) does.
+MIT
