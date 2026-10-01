@@ -42,9 +42,6 @@ There is no store listing or prebuilt package yet. [Build from source](#build-fr
 
 ## Build from source
 
-The original stylesheet is Anthropic's, so it is **not** committed here. You generate it from the public
-stylesheets that claude.ai serves to you:
-
 1. Open <https://claude.ai> in your browser, open DevTools → Console and run
    ```js
    [...document.styleSheets].map(s => s.href).filter(Boolean)
